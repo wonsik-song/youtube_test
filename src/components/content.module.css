@@ -6,7 +6,7 @@
     transition: transform 250ms ease-in;
 }
 .container:hover {
-    transform: scale(1.01);
+    transform: scale(1.011);
 }
 
 .text {
