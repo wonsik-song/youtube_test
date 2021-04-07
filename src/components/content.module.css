@@ -1,0 +1,30 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    background-color: black;
+    cursor: pointer;
+    transition: transform 250ms ease-in;
+}
+.container:hover {
+    transform: scale(1.01);
+}
+
+.text {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    color: white;
+}
+
+.title {
+    font-weight: bold;
+}
+
+.description {
+    margin-top: 0.5rem;
+}
+
+.image {
+    width: 100%;
+    height: auto;
+}

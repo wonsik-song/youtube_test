@@ -1,0 +1,13 @@
+.container {
+    display: grid;
+    list-style: none;
+    grid-template-columns: 50% 50%;
+    gap: 1em 1em;
+    margin: 0 1.5em;
+    justify-content: space-around;
+}
+
+.content {
+    justify-content: space-around;
+    align-items: space-around;
+}
