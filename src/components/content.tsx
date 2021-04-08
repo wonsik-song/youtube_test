@@ -3,11 +3,16 @@ import styles from './content.module.css';
 import { htmlToText } from 'html-to-text';
 
 class Content extends Component<any, any> {
+    handleContentClick = (e: any) => {
+        console.log(e.currentTarget.dataset.id);
+        this.props.selectContent(e.currentTarget.dataset.id);
+    };
+
     render() {
         const item = this.props.content;
         return (
-            <li className={styles.container}>
-                <img className={styles.image} src={item.thumbnails.high.url} alt="" />
+            <li className={styles.container} data-id={item.channelId} onClick={this.handleContentClick}>
+                <img className={styles.image} src={item.thumbnails.medium.url} alt="" />
                 <div className={styles.text}>
                     <p className={styles.title}>{htmlToText(item.title)}</p>
                     <p className={styles.description}>{htmlToText(item.description)}</p>

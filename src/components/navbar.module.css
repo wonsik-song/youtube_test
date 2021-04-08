@@ -3,16 +3,16 @@
     --navbar-height: 50px;
     --navbar-min-width: 600px;
     --navbar-font-size: 32px;
-    --navbar-padding: 5px;
+    --navbar-padding: 10px;
 
     --navbar-title-container-width: 140px;
     --navbar-title-container-height: 40px;
 
     --navbar-title-icon-size: 35px;
-    --navbar-title-icon-padding: 5px;
+    --navbar-title-icon-padding: 10px;
     --navbar-title-text-size: 20px;
 
-    --navbar-search-container-width: 70vw;
+    --navbar-search-container-width: 80vw;
     --navbar-search-container-min-width: 300px;
     --navbar-search-container-height: var(--navbar-title-container-height);
     --navbar-search-container-width-margin: 5vw;
@@ -20,7 +20,7 @@
     --navbar-input-width-size: 90%;
     --navbar-input-height-size: 40px;
     --navbar-input-left-padding: 5px;
-    --navbar--input-font-size: 20px;
+    --navbar-input-font-size: 20px;
 
     --navbar-search-icon-size: 29px;
     --navbar-search-icon-padding: 5px;
@@ -56,11 +56,13 @@
     align-items: center;
     justify-content: flex-start;
     overflow: hidden;
+    padding-left: var(--navbar-input-left-padding);
 }
 
 .icon {
     font-size: var(--navbar-title-icon-size);
-    padding: var(--navbar-title-icon-padding);
+    padding-left: var(--navbar-title-icon-padding);
+    color: red;
 }
 
 .title {
@@ -83,7 +85,7 @@
 .input {
     width: var(--navbar-input-width-size);
     height: var(--navbar-input-height-size);
-    font-size: var(navbar--input-font-size);
+    font-size: var(--navbar-input-font-size);
     padding-left: var(--navbar-input-left-padding);
 }
 

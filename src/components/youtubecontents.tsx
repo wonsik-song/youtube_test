@@ -7,8 +7,7 @@ class Youtubecontents extends Component<any, any> {
         let listItem = [];
         if (this.props.videoData !== undefined) {
             console.log(this.props.videoData);
-            //listItem = this.props.videoData.map((item, index) => <li key={index}>{item.etag}</li>);
-            listItem = this.props.videoData.map((item: any, index: Number) => <Content className={styles.content} content={item.snippet} />);
+            listItem = this.props.videoData.map((item: any) => <Content content={item.snippet} selectContent={this.props.selectContent} />);
             console.log(listItem, this.props.videoData);
         }
 

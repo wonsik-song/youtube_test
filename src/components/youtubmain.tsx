@@ -12,10 +12,10 @@ class Youtubmain extends Component<any, any> {
         super(props);
         console.log(props);
         this.state = {
-            // 이 컴포넌트의 state 설정
             videoData: [],
             searchData: [],
             isDataLoading: false,
+            mode: 'search',
         };
         this.youtube = this.props.onRepository.repository;
     }
@@ -23,67 +23,54 @@ class Youtubmain extends Component<any, any> {
     componentDidMount() {
         console.log('test');
         this.setState({ isDataLoading: true });
-        this.youtube.fetchYouTubeSearchData('').then((response) => {
+        this.fetchYouTubeSearchData('');
+    }
+
+    fetchYouTubeSearchData = (keyword: string) => {
+        this.youtube.fetchYouTubeSearchData(keyword).then((response) => {
             this.setState({ isDataLoading: false });
             this.setState({ searchData: Object.assign(response.items) });
         });
+    };
+
+    checkChnnalID(itemId: string, selectItemId: string) {
+        return itemId === selectItemId;
+    }
+    onContentClick(channelId: any) {
+        const data = this.state.searchData.filter((test: any) => test.snippet.channelId === channelId).slice(0, 1);
+        console.log('test2', data[0].id.videoId);
+        const videoData = Object.assign(data[0]);
+        const currentMode = this.state.mode === 'search' ? 'video' : 'search';
+        this.setState({ videoData: videoData });
+        this.setState({ mode: currentMode });
     }
 
-    fetchDataApi = async (baseUri: string, params: any) => {
-        this.setState({ isDataLoading: true });
-        let uri =
-            baseUri +
-            Object.keys(params)
-                .map((k) => encodeURIComponent(k) + '=' + encodeURIComponent(params[k]))
-                .join('&');
-        const data = await fetch('http://localhost:4000', {
-            method: 'GET',
-        }).then((response) => response.json());
-        this.setState({ isDataLoading: false });
-        return data;
-    };
-
-    fetchYouTubeVideosData = async () => {
-        const baseUri = 'https://youtube.googleapis.com/youtube/v3/videos?';
-        let params = {
-            key: 'AIzaSyBibCTbHjNXHOBrHI7kR1EADciaZhGhR5U',
-            maxResults: 25,
-            chart: 'mostPopular',
-        };
-        let data = await this.fetchDataApi(baseUri, params);
-        console.log(data.items);
-        let items = Object.assign(data.items);
-        this.setState({ videoData: items });
-    };
-
-    fetchYouTubeSearchData = async (keyword: string) => {
-        //const baseUri = 'https://youtube.googleapis.com/youtube/v3/search?';
-        const baseUri = 'http://localhost:4000?';
-        let params = {
-            // part: 'snippet',
-            // key: 'AIzaSyBibCTbHjNXHOBrHI7kR1EADciaZhGhR5U',
-            // maxResults: 25,
-            // q: keyword,
-        };
-        let data = await this.fetchDataApi(baseUri, params);
-        console.log(data);
-        let items = Object.assign(data.items);
-        this.setState({ searchData: items });
-    };
-
     render() {
-        const contents = <Youtubecontents videoData={this.state.searchData} />;
+        const contents = (
+            <div className={styles.youtube_contents}>
+                <Youtubecontents videoData={this.state.searchData} selectContent={this.onContentClick.bind(this)} />;
+            </div>
+        );
+
+        const videoPlayer = (
+            <div className={styles.vidoe_player}>
+                <Videoplayer videoId={this.state.videoData} />
+            </div>
+        );
+        const navbar = <Navbar onGetData={this.fetchYouTubeSearchData} />;
         const spinner = (
-            <div className={styles.container}>
+            <div className={styles.spinner}>
                 <Loader type="TailSpin" color="#ababab" height={80} width={80} />
             </div>
         );
         return (
             <div>
-                <Navbar onGetData={this.fetchYouTubeSearchData} />
-                <Youtubecontents videoData={this.state.searchData} />
-                {/* {this.state.isDataLoading?spinner:contents} */}
-                {/* <Videoplayer /> */}
+                {this.state.mode === 'search' ? navbar : ''}
+                {this.state.isDataLoading ? spinner : ''}
+                <div className={styles.body_container}>
+                    {this.state.mode !== 'search' ? videoPlayer : ''}
+                    {contents}
+                </div>
             </div>
         );
     }

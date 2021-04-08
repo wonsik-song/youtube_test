@@ -30,17 +30,15 @@ class Youtube {
         };
         let data = await this.fetchDataApi(this.baseUri, params);
         console.log(data.items);
-        let items = Object.assign(data.items);
     };
 
     fetchYouTubeSearchData = (keyword: string) => {
-        //const baseUri = 'https://youtube.googleapis.com/youtube/v3/search?';
-        // const baseUri = 'http://localhost:4000?';
         let params = {
             part: 'snippet',
             key: 'AIzaSyAOi3MPTf4Z8KeZcLWLkkMWHydd2hF7ySA',
             maxResults: 25,
-            q: 'bts',
+            q: keyword,
+            type: 'video',
         };
         console.log(this.baseUri);
         let data = this.fetchDataApi(this.baseUri, params);
