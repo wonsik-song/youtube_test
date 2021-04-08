@@ -4,6 +4,7 @@
     background-color: black;
     cursor: pointer;
     transition: transform 250ms ease-in;
+    box-shadow: 2px 2px 8px 0px gray;
 }
 .container:hover {
     transform: scale(1.011);

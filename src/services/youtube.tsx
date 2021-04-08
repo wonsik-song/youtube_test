@@ -1,10 +1,12 @@
 class Youtube {
     baseUri: string;
-    params: object;
+    secretKey: string;
 
-    constructor(basUri: string, params: object) {
+    constructor(basUri: string, secretKey: string) {
+        console.log(basUri);
+        console.log(secretKey);
         this.baseUri = basUri;
-        this.params = params;
+        this.secretKey = secretKey;
     }
 
     fetchDataApi = async (baseUri: string, params: any) => {
@@ -13,7 +15,7 @@ class Youtube {
             Object.keys(params)
                 .map((k) => encodeURIComponent(k) + '=' + encodeURIComponent(params[k]))
                 .join('&');
-        const data = await fetch(this.baseUri, {
+        const data = await fetch(uri, {
             method: 'GET',
         });
         const data2 = await data.json();
@@ -22,7 +24,7 @@ class Youtube {
 
     fetchYouTubeVideosData = async () => {
         let params = {
-            key: 'AIzaSyBibCTbHjNXHOBrHI7kR1EADciaZhGhR5U',
+            key: this.secretKey,
             maxResults: 25,
             chart: 'mostPopular',
         };
@@ -33,14 +35,15 @@ class Youtube {
 
     fetchYouTubeSearchData = (keyword: string) => {
         //const baseUri = 'https://youtube.googleapis.com/youtube/v3/search?';
-        const baseUri = 'http://localhost:4000?';
+        // const baseUri = 'http://localhost:4000?';
         let params = {
             part: 'snippet',
-            key: 'AIzaSyBibCTbHjNXHOBrHI7kR1EADciaZhGhR5U',
+            key: 'AIzaSyAOi3MPTf4Z8KeZcLWLkkMWHydd2hF7ySA',
             maxResults: 25,
-            q: keyword,
+            q: 'bts',
         };
-        let data = this.fetchDataApi(baseUri, params);
+        console.log(this.baseUri);
+        let data = this.fetchDataApi(this.baseUri, params);
         console.log(data);
         return data;
     };

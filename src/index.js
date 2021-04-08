@@ -4,11 +4,14 @@ import './index.css';
 import App from './app';
 import '@fortawesome/fontawesome-free/js/all.js';
 import Youtube from './services/youtube';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 ReactDOM.render(
   <React.StrictMode>
     <>
-    <App repository={new Youtube('http://localhost:4000', {})}/>
+    <App repository={new Youtube(process.env.REACT_APP_BASE_URI, process.env.REACT_APP_API_KEY)}/>
     </>
   </React.StrictMode>,
   document.getElementById('root')
