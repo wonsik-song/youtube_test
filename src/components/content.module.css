@@ -1,18 +1,10 @@
 .container {
     display: flex;
     flex-direction: row;
-    background-color: black;
     cursor: pointer;
-    transition: transform 250ms ease-in;
-    box-shadow: 2px 2px 8px 0px gray;
-    min-width: 100px;
     justify-content: flex-start;
     align-items: center;
-    padding: 10px;
-    width: 100%;
-}
-.container:hover {
-    transform: scale(1.01);
+    height: auto;
 }
 
 .text {
@@ -20,6 +12,8 @@
     display: flex;
     flex-direction: column;
     color: white;
+    flex-wrap: wrap;
+    height: auto;
 }
 
 .title {
@@ -30,11 +24,10 @@
 .description {
     margin-top: 0.5rem;
     flex-wrap: wrap;
+    text-align: justify;
 }
 
 .image {
-    width: 320px;
-    height: 180px;
-    flex-wrap: unwrap;
-    align-items: center;
+    width: 160px;
+    height: auto;
 }

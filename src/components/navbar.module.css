@@ -1,9 +1,9 @@
 :root {
     --navbar-width: 100vw;
-    --navbar-height: 50px;
+    --navbar-height: 30px;
     --navbar-min-width: 600px;
     --navbar-font-size: 32px;
-    --navbar-padding: 10px;
+    --navbar-padding: 20px;
 
     --navbar-title-container-width: 140px;
     --navbar-title-container-height: 40px;
@@ -50,46 +50,44 @@
 }
 
 .title_container {
-    width: var(--navbar-title-container-width);
-    height: var(--navbar-title-container-height);
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    overflow: hidden;
-    padding-left: var(--navbar-input-left-padding);
+    flex-wrap: nowrap;
+    flex: 0 0 150px;
 }
 
 .icon {
     font-size: var(--navbar-title-icon-size);
     padding-left: var(--navbar-title-icon-padding);
     color: red;
+    flex: 0 0 auto;
 }
 
 .title {
     font-size: var(--navbar-title-text-size);
+    flex: 0 0 auto;
 }
 
 .search_container {
-    position: relative;
-    top: 0;
-    left: 0;
+    flex: 1 1 auto;
+
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    width: var(--navbar-search-container-width);
     height: var(--navbar-search-container-height);
-    min-width: var(--navbar-search-container-min-width);
-    margin: 0 var(--navbar-search-container-width-margin);
-}
-
-.input {
-    width: var(--navbar-input-width-size);
-    height: var(--navbar-input-height-size);
-    font-size: var(--navbar-input-font-size);
-    padding-left: var(--navbar-input-left-padding);
+    padding: 40px;
 }
 
 .search {
+    flex: 0 0 20px;
     font-size: var(--navbar-search-icon-size);
     padding: var(--navbar-search-icon-padding);
+}
+
+.input {
+    flex: 1 1 auto;
+    height: var(--navbar-input-height-size);
+    font-size: var(--navbar-input-font-size);
+    padding-left: var(--navbar-input-left-padding);
 }

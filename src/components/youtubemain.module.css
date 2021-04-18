@@ -1,3 +1,8 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
 .spinner {
     width: 80px;
     margin: auto;
@@ -6,30 +11,94 @@
     right: 50%;
 }
 
-.body_container {
+#main_container {
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: column;
+    align-items: stretch;
+    height: 100vh;
+    flex-wrap: nowrap;
+}
+
+#navbar {
+    box-sizing: border-box;
+    flex: 0 0 auto;
+}
+
+#content_container {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+
+#video_player {
+    box-sizing: border-box;
+    flex: 0 0 20%;
+    background-color: blue;
+}
+
+#item_container {
+    flex: 1 1 80%;
+    box-sizing: border-box;
     display: flex;
     flex-direction: row;
-    background-color: black;
-    /* position: sticky;
-    top: 0; */
+    list-style: none;
+    box-sizing: border-box;
+    align-content: stretch;
+    flex-wrap: wrap;
 }
-.youtube_contents {
-    flex: 1 1 30%;
-}
-.vidoe_player {
-    flex: 1 1 70%;
-    /* position: fixed;
-    top: 0;
-    left: 0; */
-}
-/* .container{
-    width: 100%;
-    height: 100%;
-} */
 
-@media (max-width: 1000px) {
-    .body_container {
+#youtube_item {
+    box-sizing: border-box;
+    box-shadow: 2px 2px 8px 0px gray;
+    background-color: black;
+    flex: 1 1 50%;
+    transition: transform 250ms ease-in;
+    display: flex;
+    align-items: center;
+}
+
+#youtube_item:hover {
+    transform: scale(1.01);
+}
+
+/* @media (max-width: 700px) {
+    #content_container {
+        flex: 1 1 auto;
         display: flex;
         flex-direction: column;
+        flex-wrap: nowrap;
     }
-}
+
+    #video_player {
+        box-sizing: border-box;
+        flex: 1 1 40%;
+        background-color: blue;
+    }
+
+    #item_container {
+        flex: 1 1 60%;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: row;
+        list-style: none;
+        box-sizing: border-box;
+        align-content: stretch;
+        flex-wrap: wrap;
+    }
+
+    #youtube_item {
+        box-sizing: border-box;
+        box-shadow: 2px 2px 8px 0px gray;
+        background-color: black;
+        flex: 1 1 50%;
+        transition: transform 250ms ease-in;
+        display: flex;
+        align-items: center;
+    }
+
+    #youtube_item:hover {
+        transform: scale(1.01);
+    }
+} */

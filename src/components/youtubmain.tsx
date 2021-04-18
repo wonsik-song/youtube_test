@@ -5,6 +5,7 @@ import Loader from 'react-loader-spinner';
 import styles from './youtubemain.module.css';
 import Videoplayer from './videoplayer';
 import Youtube from '../services/youtube';
+import Content from './content';
 
 class Youtubmain extends Component<any, any> {
     youtube: Youtube;
@@ -29,7 +30,10 @@ class Youtubmain extends Component<any, any> {
     fetchYouTubeSearchData = (keyword: string) => {
         this.youtube.fetchYouTubeSearchData(keyword).then((response) => {
             this.setState({ isDataLoading: false });
+            console.log('test2');
+            console.log(response.items);
             this.setState({ searchData: Object.assign(response.items) });
+            console.log(this.state.searchData);
         });
     };
 
@@ -37,40 +41,43 @@ class Youtubmain extends Component<any, any> {
         return itemId === selectItemId;
     }
     onContentClick(channelId: any) {
-        const data = this.state.searchData.filter((test: any) => test.snippet.channelId === channelId).slice(0, 1);
-        console.log('test2', data[0].id.videoId);
+        const data = this.state.searchData.filter((item: any) => item.snippet.channelId === channelId).slice(0, 1);
         const videoData = Object.assign(data[0]);
         const currentMode = this.state.mode === 'search' ? 'video' : 'search';
         this.setState({ videoData: videoData });
         this.setState({ mode: currentMode });
     }
 
-    render() {
-        const contents = (
-            <div className={styles.youtube_contents}>
-                <Youtubecontents videoData={this.state.searchData} selectContent={this.onContentClick.bind(this)} />;
-            </div>
-        );
-
-        const videoPlayer = (
-            <div className={styles.vidoe_player}>
-                <Videoplayer videoId={this.state.videoData} />
-            </div>
-        );
-        const navbar = <Navbar onGetData={this.fetchYouTubeSearchData} />;
-        const spinner = (
-            <div className={styles.spinner}>
-                <Loader type="TailSpin" color="#ababab" height={80} width={80} />
-            </div>
-        );
-        return (
-            <div>
-                {this.state.mode === 'search' ? navbar : ''}
-                {this.state.isDataLoading ? spinner : ''}
-                <div className={styles.body_container}>
-                    {this.state.mode !== 'search' ? videoPlayer : ''}
-                    {contents}
+    getYoutubItems() {
+        let listItem = [];
+        if (this.state.searchData !== undefined) {
+            listItem = this.state.searchData.map((item: any) => (
+                <div id={styles.youtube_item}>
+                    <Content content={item.snippet} selectContent={this.onContentClick.bind(this)} />
                 </div>
+            ));
+        }
+        return listItem;
+    }
+
+    render() {
+        return (
+            <div id={styles.main_container}>
+                <div id={styles.navbar}>{this.state.mode === 'search' ? <Navbar onGetData={this.fetchYouTubeSearchData} /> : ''}</div>
+                <div id={styles.content_container}>
+                    {/* <div id={styles.video_player}>{this.state.mode !== 'search' ? <Videoplayer videoId={this.state.videoData} /> : ''}</div>
+                    <div id={styles.item_container}>{this.getYoutubItems()}</div> */}
+                    {this.state.mode !== 'search' ? (
+                        <div id={styles.video_player}>
+                            {' '}
+                            <Videoplayer videoId={this.state.videoData} />{' '}
+                        </div>
+                    ) : (
+                        ''
+                    )}
+                    <div id={styles.item_container}>{this.getYoutubItems()}</div>
+                </div>
+                <div className={styles.spinner}>{this.state.isDataLoading ? <Loader type="TailSpin" color="#ababab" height={80} width={80} /> : ''}</div>
             </div>
         );
     }
